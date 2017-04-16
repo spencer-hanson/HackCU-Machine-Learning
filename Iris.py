@@ -36,9 +36,7 @@ def loadData(filename):
 	return [x_data, y_data];
 
 if __name__ == "__main__":
-	[x_data, y_data] = loadData("IrisTraining.csv");
-	[x_test, y_test] = loadData("IrisTest.csv");
-
-#	plt.scatter(x_data[:,0], x_data[:,1])
-#	plt.show()	
+	[x_data, y_data] = loadData("iris_data.csv");
+	print x_data;
+	print y_data;
 
