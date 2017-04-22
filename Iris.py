@@ -41,6 +41,19 @@ def loadData(filename):
 			x_data[j,i] = (x_data[j,i]-x_min)/(x_diff);
 
 	return [x_data, y_data];
+def hypothesisFunc(theta, x):
+	hx = expit(np.dot(x, theta));
+	return hx;
+def costFunc(theta, x, y):
+	hx = x.dot(theta);
+	term1 = np.dot(-np.array(y).T, np.log(hypothesisFunc(theta, x)));
+	term2 = np.dot((1-np.array(y)).T, np.log(1-hypothesisFunc(theta, x)));
+	J = (1./m) * (np.sum(term1 - term2));
+	return J;
+
+def gradDescent(theta, x, y):
+	result = optimize.fmin(costFunc, x0=theta, args=(x, y), maxiter=1000, full_output=True);
+	return result[0], result[1];
 
 def plotData(x, y):
 	plt.figure(figsize=(10,6));
@@ -55,12 +68,28 @@ def plotData(x, y):
 	plt.xlabel("Sepal Length (cm)");
 	plt.legend();
 	plt.grid(True);
+	#plt.show()
+def graphBoundary(theta, x, y):
+	
+	dim_1 = 1;
+	dim_2 = 2;
 
+	bound_x = np.array([np.min(x[:, dim_1]), np.max(x[:,dim_1])]);
+	
+
+	bound_y = (-1./theta[dim_2])*(theta[0] + theta[dim_1]*bound_x);
+	plotData(x, y);	
+	plt.plot(bound_x, bound_y, 'b-', label="Decision Boundary");
+	plt.legend();
+	plt.show();
 
 if __name__ == "__main__":
-	[x_data, y_data] = loadData("iris_data.csv");
+	filename = "iris_data.csv";
+	[x_data, y_data] = loadData(filename);
 	(m, n) = x_data.shape;
+
+	theta = np.zeros(shape=(n,1));
+	theta, mincost = gradDescent(theta, x_data, y_data);
+	graphBoundary(theta, x_data, y_data);
 	
-	plotData(x_data, y_data);
-	plt.show();
 
