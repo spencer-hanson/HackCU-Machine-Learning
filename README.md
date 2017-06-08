@@ -5,14 +5,13 @@
 
 <div align="center"><img src="media/iris.jpg" /></div>
 
+### Running the lab
 
-#### The columns in this dataset are:
-* Id
-* SepalLengthCm
-* SepalWidthCm
-* PetalLengthCm
-* PetalWidthCm
-* Species
+To run this lab, simply execute the python script, in python2.7
+~~~~
+python Iris.py
+~~~~
+
 
 #### Packages needed for this lab
 * scipy
@@ -21,3 +20,12 @@
 ~~~~
 sudo pip install scipy numpy matplotlib
 ~~~~
+
+
+#### The columns in this dataset are:
+* Id
+* SepalLengthCm
+* SepalWidthCm
+* PetalLengthCm
+* PetalWidthCm
+* Species
